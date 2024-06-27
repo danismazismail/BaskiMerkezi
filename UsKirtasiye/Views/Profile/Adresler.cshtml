@@ -1,0 +1,69 @@
+﻿@model List<UsKirtasiye.DB.Addresses>
+@{
+    ViewBag.Title = "Adresler";
+    int sayi = 0;
+}
+
+<div class="single-product-area section-padding-100 ">
+    <div class="container-fluid">
+        <div class="amado-btn-group" style="text-align:right">
+            <a style="border-radius:10px;" href="@Url.Action("AdresEkle","Profile")" class="btn amado-btn mb-15"><span class="fa fa-plus "></span> Adres Ekle</a> @*Hakkımızda url ve sayfası gelecek*@
+        </div>
+        @foreach (var item in Model)
+        {
+
+            sayi++;
+            using (Html.BeginForm("Adresler", "Profile"))
+            {
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="container">
+
+                            <div class="card" style="background-image:url(https://png.pngtree.com/thumb_back/fh260/background/20190223/ourmid/pngtree-gold-gold-low-profile-background-material-low-profilebackground-materialconference-image_69763.jpg)">
+                                <div class="row">
+                                    <div class="col-2"></div>
+
+                                    <div class="col-8 ">
+                                        <h4 class="card-title mt-3 text-center"><b><span style="font-weight:bold" class="fa fa-address-book"></span> Adres @sayi</b></h4>
+
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-address-card"></i> </span>
+                                            </div>
+                                            @Html.HiddenFor(adres => item.Id, new { @class = "form-control", Name = "Id" })
+                                            @Html.TextBoxFor(adres => item.Name, new { @class = "form-control", type = "text", required = "required", Name = "Name" })
+                                        </div> <!-- form-group// -->
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-location-arrow"></i> </span>
+                                            </div>
+                                            @Html.TextBoxFor(adres => item.AdresDescription, new { @class = "form-control", type = "text", required = "required", Name = "AdresDescription" })
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="form-group col-6">
+                                                    <button type="submit" class="btn btn-secondary btn-block"><span class="fa fa-repeat"></span> Güncelle </button>
+                                                </div> <!-- form-group// -->
+                                                <div class="form-group col-6">
+                                                    <button type="button" class="btn btn-secondary btn-block" onclick="location.href='@Url.Action("DeleteAdress", "Profile",new {adressId=item.Id })'"><span class="fa fa-trash"></span> Sil </button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- card.// -->
+                                    </div> <!-- card.// -->
+                                    <div class="col-2"></div>
+                                </div> <!-- card.// -->
+                            </div>
+                        </div>
+                        <!--container end.//-->
+                    </div>
+                </div>
+                <br />
+                <br />
+                <hr />
+
+            }
+        }
+    </div>
+</div>

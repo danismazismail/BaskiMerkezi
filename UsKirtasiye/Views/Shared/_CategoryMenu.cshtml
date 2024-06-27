@@ -1,0 +1,63 @@
+﻿@model List<UsKirtasiye.DB.Categories>
+
+<div class="shop_sidebar_area">
+
+    <!-- ##### Single Widget ##### -->
+    <div class="widget catagory mb-50">
+        <!-- Widget Title -->
+        <h6 class="widget-title mb-30">Kategoriler - Ürünlerimiz</h6>
+
+        <!--  Catagories  -->
+        <div class="catagories-menu">
+            <ul>
+
+                @foreach (var cat in Model)
+                {
+
+                    if (cat.Categories1.Any())
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="@Url.Action("Product","Product",new { id=cat.Id })">@cat.Name<span class="caret"></span></a>
+                            @_MenuHelper.MenuRecursive(cat.Categories1.ToList())
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Product","Product",new { id=cat.Id })">@cat.Name</a></li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@*<!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark orange lighten-1">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+                aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+            <ul class="navbar-nav mr-auto">
+                @foreach (var cat in Model)
+                {
+
+                    if (cat.Categories1.Any())
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle" href="@Url.Action("Product","Product",new { id=cat.Id })">@cat.Name<span class="caret"></span></a>
+                            @_MenuHelper.MenuRecursive(cat.Categories1.ToList())
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Product","Product",new { id=cat.Id })">@cat.Name</a></li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </nav>
+    <!--/.Navbar -->*@
